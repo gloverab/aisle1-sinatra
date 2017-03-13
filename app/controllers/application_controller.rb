@@ -13,15 +13,4 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  post '/new_user' do
-    # binding.pry
-    user = User.new(params)
-    if user.save
-      session[:id] = user.id
-      redirect "/users/#{user.username}"
-    else
-      redirect "/"
-    end
-  end
-
 end

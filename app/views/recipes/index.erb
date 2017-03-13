@@ -1,0 +1,7 @@
+<h2>Hi <%= current_user.name %>, here are all your recipes</h2>
+
+<ul>
+  <% current_user.recipes.each do |recipe| %>
+  <li><%= recipe.name %> - <%= recipe.cooktime %></li>
+  <% end %>
+</ul>

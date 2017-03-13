@@ -13,4 +13,8 @@ module Helper
     # binding.pry
   end
 
+  def slug(name)
+    no_punc.downcase.gsub(" ","-")
+  end
+
 end

@@ -4,27 +4,37 @@ class UsersController < ApplicationController
 
   include Helper
 
-  get '/users/:username' do
-    @user = User.find_by(username: params[:username])
-    erb :'user/index'
+  get '/users/new' do
+    erb :'users/new'
   end
 
-  post '/recipe/new' do
+  post '/users/new' do
     # binding.pry
-    @recipe = Recipe.new(
-    name: params[:name],
-    cooktime: params[:cooktime],
-    user_id: current_user.id
-    )
-    @ingredients = ingredient_parser(params[:recipe][:ingredients])
-    @ingredients.each do |ingredient|
-      # binding.pry
-      new_ingredient = Ingredient.find_or_create_by(name: ingredient.downcase)
-      
-      @recipe.ingredients
+    user = User.new(params)
+    if user.save
+      session[:id] = user.id
+      redirect "/users/#{user.username}"
+    else
+      redirect "/"
     end
-    # binding.pry
-    erb :'user/index'
+  end
+
+  post '/users/login' do
+    @user = User.find_by(username: params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:id] = @user.id
+      redirect "/users/#{@user.username}"
+    end
+  end
+
+  get '/users/:test' do
+    @name = "Captain's super famouse douchey&boy chicken"
+    binding.pry
+  end
+
+  get '/users/:username' do
+    @user = User.find_by(username: params[:username])
+    erb :'users/home'
   end
 
 end
