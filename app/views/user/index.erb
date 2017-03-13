@@ -1,0 +1,13 @@
+<h2>Welcome, <%= @user.name %></h2>
+
+<h3>To add a new recipe, fill out the form below</h3>
+
+  <form action = "/recipe/new" method="POST">
+    <p>Recipe Name: <input type="text" name="name" id="name"></p>
+    <p>Recipe Cooktime: <input type="text" name="cooktime" id="cooktime"></p>
+    <p>Recipe Ingredients (please seperate by comma): <input type="text" name="recipe[ingredients]" id="ingredients"></p>
+
+    <input type="submit" value="submit">
+  </form>
+
+<h3>To get your sh*t together for the week, click below</h3>
