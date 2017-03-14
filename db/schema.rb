@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313161903) do
+ActiveRecord::Schema.define(version: 20170313221223) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 20170313161903) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
+  end
+
+  create_table "week_recipes", force: :cascade do |t|
+    t.integer "week_id"
+    t.integer "recipe_id"
+  end
+
+  create_table "weeks", force: :cascade do |t|
+    t.string "date"
   end
 
 end

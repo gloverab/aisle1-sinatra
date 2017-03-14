@@ -7,9 +7,36 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,700,800,900" rel="stylesheet">
   </head>
   <body>
+
     <header>
+      <% if logged_in? %>
+      <a href="/users/<%= current_user.username %>" class="logo">Shoppr</a>
+
+      <div class="nav">
+        <ul>
+          <li><a href="/recipes/new">New Recipe</a></li> |
+          <li><a href="/recipes">My Recipes</a></li> |
+          <li><a href="/logout">Log out</a></li>
+        </ul>
+      </div>
+
+      <% else %>
       <a href="/" class="logo">Shoppr</a>
+
+      <div class="nav">
+        <ul>
+          <li>facebook</li> |
+          <li>twitter</li> |
+          <li>instagram</li>
+        </ul>
+      </div>
+    <% end %>
+
     </header>
+
+    <section>
     <%= yield %>
+    </section>
+
   </body>
 </html>

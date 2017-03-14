@@ -1,11 +1,13 @@
-<h1>HOWDY!</H1>
+<div class="login">
 
-<h3><a href="/user/new">Create an Account</a> or log in below:</h3>
+  <h3><a href="/users/new">Create an Account</a> or log in below:</h3>
 
-<form action="/users/login" method="POST">
+  <form action="/users/login" method="POST" id="login">
 
-  <p>Username: <input type="text" name="username" id="username"></p>
-  <p>Password: <input type="password" name="password" id="password"></p>
+    <p>Username: <input type="text" name="username" id="username" style="border: 1px solid #251101;"></p>
+    <p>Password: <input type="password" name="password" id="password" style="border: 1px solid #251101; background-color: transparent; height: 18px; margin-left: 5px;" size=27></p>
 
-  <input type="submit" value="submit">
-</form>
+    <input type="submit" value="submit">
+  </form>
+
+</div>

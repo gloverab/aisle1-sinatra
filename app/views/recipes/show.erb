@@ -1,0 +1,19 @@
+<h2><%= @recipe.name %></h2>
+
+<a href="/recipes/<%= @recipe.id %>/edit">Edit Recipe</a>
+<form action="/recipes/<%= @recipe.id %>/delete" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Recipe">
+</form>
+
+<h4>Estimated Cooktime</h4>
+<p><%= @recipe.cooktime %></p>
+
+<h4>Ingredients</h4>
+<ul>
+  <% @recipe.ingredients.each do |ingredient| %>
+  <li><%= ingredient.name %></li>
+  <% end %>
+</ul>
+
+<a href="/recipes">back</a>

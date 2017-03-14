@@ -27,9 +27,8 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/users/:test' do
-    @name = "Captain's super famouse douchey&boy chicken"
-    binding.pry
+  get '/users/weeks' do
+    erb :'users/weeks'
   end
 
   get '/users/:username' do

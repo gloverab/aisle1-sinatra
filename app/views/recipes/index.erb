@@ -2,6 +2,6 @@
 
 <ul>
   <% current_user.recipes.each do |recipe| %>
-  <li><%= recipe.name %> - <%= recipe.cooktime %></li>
+  <li><a href="recipes/<%= recipe.slug %>"><%= recipe.name %></a> - <%= recipe.cooktime %></li>
   <% end %>
 </ul>

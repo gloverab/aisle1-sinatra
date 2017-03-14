@@ -1,6 +1,10 @@
+/* HEADER */
+
 body {
   font-family: "Raleway";
   margin: 0 auto;
+  background-color: #F7EDE2;
+  color: #251101;
 }
 
 header {
@@ -10,13 +14,101 @@ header {
   top: 0;
 }
 
-header .logo {
-  margin-left: 10px;
+header a {
   text-decoration: none;
-  font-size: 3em;
   color: #5C0029;
 }
 
-header .logo:hover {
-  color: #857C8D;
+header .logo {
+  margin-left: 10px;
+  font-size: 3.5em;
+}
+
+header a:hover {
+  color: #EF798A;
+}
+
+header .nav {
+  float: right;
+  margin-right: 10px;
+  margin-top: 25px;
+}
+
+header ul {
+  list-style: none;
+  float: right;
+  text-align: right;
+}
+
+header li {
+  display: inline;
+  text-decoration
+}
+
+/* YIELD */
+
+section {
+  margin: 10px;
+}
+
+/* LOGIN */
+
+.login {
+  margin-top: 100px;
+  background-color: black;
+}
+
+/* HOME */
+
+.home {
+  margin-top: 80px;
+}
+
+.user-select {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.big-btn {
+  width: 40px;
+  height: auto;
+  text-decoration: none;
+  color: #5C0029;
+  padding: 20px 40px;
+  background-color: #94BFBE;
+  border: 1px solid #5C0029;
+  border-radius: 4px;
+}
+
+.big-btn:hover {
+  border: 1px solid #EF798A;
+}
+
+textarea#ingredients {
+  width: 40%;
+  height: 100px;
+  padding: 12px 20px;
+  border: 1px solid #251101;
+  box-sizing: border-box;
+  background-color: transparent;
+  resize: none;
+}
+
+#ingredients:focus {
+  outline: none;
+}
+
+input[type=text] {
+  font-size: 1em;
+  border: none;
+  border-bottom: 1px solid #251101;
+  background-color: transparent;
+}
+
+input[type=text]:focus {
+  outline: none;
+}
+
+.form input {
+  background-color: none;
 }

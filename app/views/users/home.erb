@@ -1,9 +1,21 @@
-<h2>Welcome, <%= current_user.name %></h2>
+<h1>Welcome, <%= current_user.name %></h1>
 
-<section class="user-select">
+<section class="home user-select">
 
-  <a href="/recipes/new">Click here to add a new recipe</a>
+  <a href="/recipes/new" class="big-btn">Click here to add a new recipe</a>
 
-  <a href="/recipes">Click here to get your sh*t together for the week</a>
+  <a href="/users/weeks" class="big-btn">Click here to get your sh*t together for the week</a>
+
+</section>
+
+<section class="home favorites">
+
+<h2><%= current_user.name %>'s Favorites</h2>
+
+</section>
+
+<section class="home needs-love">
+
+<h2>Needs love</h2>
 
 </section>
