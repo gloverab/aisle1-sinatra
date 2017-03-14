@@ -1,7 +1,6 @@
 require './config/environment'
 
 class UsersController < ApplicationController
-
   include Helper
 
   get '/users/new' do
@@ -28,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   get '/users/weeks' do
-    erb :'users/weeks'
+    erb :'weeks/index'
   end
 
   post '/weeks/new' do
@@ -36,8 +35,8 @@ class UsersController < ApplicationController
     week.user_id = current_user.id
     week.save
     session[:week] = week.id
-    
-    redirect :'users/weeks'
+
+    redirect "/users/weeks"
   end
 
   get '/users/:username' do

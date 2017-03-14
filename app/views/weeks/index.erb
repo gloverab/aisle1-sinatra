@@ -4,8 +4,13 @@
 </form>
 
 <h2>Previous Weeks</h2>
-<ul>
+<table class="week-index">
 <% current_user.weeks.each do |week| %>
-  <li><%= week.date %> - <a href="#">Update this week</a></li>
+  <tr>
+    <td><%= week.date %></td>
+    <td><a href="/weeks/<%= week.id %>/add">Add Recipes</a></td>
+    <td>Edit</td>
+    <td>Delete</td>
+  </tr>
 <% end %>
-</ul>
+</table>

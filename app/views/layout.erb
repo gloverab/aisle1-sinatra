@@ -15,7 +15,7 @@
       <div class="nav">
         <ul>
           <% if current_week != nil %>
-            <li>Currently working on week of <strong><%= current_week.date %></strong></li> ||
+            <li>Currently working on week of <strong><%= current_week.date %></strong>[<a href="/weeks/show">view</a>]</li> ||
           <% else %>
             <li>Please choose a <a href="/users/weeks">week</a></li> ||
           <% end %>

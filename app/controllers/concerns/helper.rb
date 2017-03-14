@@ -17,4 +17,17 @@ module Helper
     @current_week ||= Week.find_by(id: session[:week]) if session[:week]
   end
 
+  def ingredients_with_dupe
+    @duplicates = {}
+    ingredients.each_with_index do |value, i|
+      (i + 1).upto ingredients.length - 1 do |j|
+        if ingredients[j] == value
+          @duplicates[value] = [i] if @duplicates[value].nil?
+          @duplicates[value] << j
+          break
+        end
+      end
+    end
+  end
+
 end
