@@ -1,7 +1,15 @@
+<%= flash[:message] unless flash[:message] = nil %>
+
 <h2>Hi <%= current_user.name %>, here are all your recipes</h2>
 
-<ul>
+<table class="recipe-index">
   <% current_user.recipes.each do |recipe| %>
-  <li><a href="recipes/<%= recipe.slug %>"><%= recipe.name %></a> - <%= recipe.cooktime %></li>
+
+  <tr>
+    <td><a href="/recipes/<%= recipe.slug %>"><%= recipe.name %></a></td>
+    <td><%= recipe.cooktime %></td>
+    <td><a href="/recipes/add/<%= recipe.id %>">Add to current week</a></td>
+  </tr>
+
   <% end %>
-</ul>
+</table>

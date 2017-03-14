@@ -61,6 +61,13 @@ class RecipesController < ApplicationController
     erb :'recipes/show'
   end
 
+  get '/recipes/add/:id' do
+    recipe = Recipe.find_by(id: params[:id])
+    current_week.recipes << recipe
+    flash[:message] = "Successfully added #{recipe.name} to week of #{current_week.date}!"
+    redirect "/recipes"
+  end
+
   delete '/recipes/:id/delete' do
     recipe = Recipe.find_by_id(params[:id])
     recipe.delete

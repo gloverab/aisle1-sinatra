@@ -3,7 +3,7 @@ class Recipe < ActiveRecord::Base
 
   has_many :recipe_ingredients
   has_many :ingredients, through: :recipe_ingredients
-  
+
   has_many :week_recipes
   has_many :weeks, through: :week_recipes
 

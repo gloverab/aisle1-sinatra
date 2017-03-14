@@ -5,12 +5,17 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-    enable :sessions
     set :session_secret, "secret"
+    register Sinatra::Flash
+    enable :sessions
   end
 
   get '/' do
-    erb :index
+    if !logged_in?
+      erb :'logged-out/index'
+    else
+      redirect "/users/#{current_user.username}"
+    end
   end
 
   get '/logout' do

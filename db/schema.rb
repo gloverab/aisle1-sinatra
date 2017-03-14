@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313221223) do
+ActiveRecord::Schema.define(version: 20170314153140) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -50,7 +50,8 @@ ActiveRecord::Schema.define(version: 20170313221223) do
   end
 
   create_table "weeks", force: :cascade do |t|
-    t.string "date"
+    t.string  "date"
+    t.integer "user_id"
   end
 
 end

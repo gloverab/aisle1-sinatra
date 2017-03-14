@@ -1,5 +1,11 @@
 <form action="/weeks/new" method="POST">
 <h2>Week of <input type="text" name="date" id="date"></h2>
+<input type="submit" value="Create Week">
 </form>
 
 <h2>Previous Weeks</h2>
+<ul>
+<% current_user.weeks.each do |week| %>
+  <li><%= week.date %> - <a href="#">Update this week</a></li>
+<% end %>
+</ul>

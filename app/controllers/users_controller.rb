@@ -31,6 +31,15 @@ class UsersController < ApplicationController
     erb :'users/weeks'
   end
 
+  post '/weeks/new' do
+    week = Week.new(params)
+    week.user_id = current_user.id
+    week.save
+    session[:week] = week.id
+    
+    redirect :'users/weeks'
+  end
+
   get '/users/:username' do
     @user = User.find_by(username: params[:username])
     erb :'users/home'

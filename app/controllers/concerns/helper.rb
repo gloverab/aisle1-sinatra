@@ -13,4 +13,8 @@ module Helper
     # binding.pry
   end
 
+  def current_week
+    @current_week ||= Week.find_by(id: session[:week]) if session[:week]
+  end
+
 end
