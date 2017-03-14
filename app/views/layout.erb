@@ -12,13 +12,17 @@
       <% if logged_in? %>
       <a href="/users/<%= current_user.username %>" class="logo">Shoppr</a>
 
+      <div class="week" style="float: right; margin-bottom: 0;">
+        <% if current_week != nil %>
+          <p>Currently working on week of <strong><%= current_week.date %></strong>[<a href="/weeks/show">view</a>][<a href="/weeks">change</a>]</p>
+        <% else %>
+          <p>Please <a href="/users/weeks">choose a week</a></p>
+        <% end %>
+      </div>
+      <br>
       <div class="nav">
+
         <ul>
-          <% if current_week != nil %>
-            <li>Currently working on week of <strong><%= current_week.date %></strong>[<a href="/weeks/show">view</a>]</li> ||
-          <% else %>
-            <li>Please choose a <a href="/users/weeks">week</a></li> ||
-          <% end %>
           <li><a href="/recipes/new">New Recipe</a></li> |
           <li><a href="/recipes">My Recipes</a></li> |
           <li><a href="/logout">Log out</a></li>

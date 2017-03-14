@@ -15,17 +15,12 @@ class Week < ActiveRecord::Base
   end
 
   def display_duplicates
-    b = Hash.new(0)
+    duplicate_hash = Hash.new(0)
 
     duplicate_ingredients.each do |dupe|
-      b[dupe] += 1
+      duplicate_hash[dupe] += 1
     end
-
-    b
-
-    # b.each do |ingredient, v|
-    #   ingredient.name
-    # end
+    duplicate_hash
   end
 
 end

@@ -1,7 +1,6 @@
 require './config/environment'
 
 class UsersController < ApplicationController
-  include Helper
 
   get '/users/new' do
     erb :'users/new'

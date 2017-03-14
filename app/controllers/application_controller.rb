@@ -1,6 +1,9 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
+  include Helper
+  include Slugifiable::InstanceMethods
+  extend Slugifiable::ClassMethods
 
   configure do
     set :public_folder, 'public'

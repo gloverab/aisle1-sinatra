@@ -1,7 +1,6 @@
 require './config/environment'
 
 class WeeksController < ApplicationController
-  include Helper
 
   get "/weeks" do
     erb :'weeks/index'
@@ -22,6 +21,13 @@ class WeeksController < ApplicationController
     current_week.recipes.delete(recipe)
 
     redirect "/weeks/show"
+  end
+
+  get "/weeks/:id/delete" do
+    week = Week.find_by_id(params[:id])
+    week.delete
+
+    redirect "/weeks"
   end
 
 end

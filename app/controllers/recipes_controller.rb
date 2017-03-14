@@ -2,8 +2,6 @@ require './config/environment'
 
 class RecipesController < ApplicationController
 
-  include Helper
-
   get '/recipes/new' do
     erb :'recipes/new'
   end
