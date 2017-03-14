@@ -14,9 +14,9 @@
   <% end %>
 </ul>
 
-<!-- <h4>Duplicate Items</h4>
+<h4>Duplicate Items</h4>
 <ul>
-  <% current_week.duplicate_ingredients.each do |ingredient| %>
-  <li><%= ingredient.name %></li>
-  <% end %> -->
+  <% current_week.display_duplicates.each do |x, y| %>
+  <li><%=x.name%> appear(s) <%= y %> times</li>
+  <% end %>
 </ul>
