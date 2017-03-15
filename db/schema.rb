@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20170314153140) do
   end
 
   create_table "ingredients", force: :cascade do |t|
-    t.string "name"
-    t.string "category_id"
+    t.string  "name"
+    t.integer "category_id"
   end
 
   create_table "recipe_ingredients", force: :cascade do |t|

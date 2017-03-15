@@ -1,16 +1,20 @@
-<form action="/weeks/new" method="POST">
-<h2>Week of <input type="text" name="date" id="date"></h2>
-<input type="submit" value="Create Week">
-</form>
+<%= flash[:message] %>
 
-<h2>Previous Weeks</h2>
-<table class="week-index">
-<% current_user.weeks.each do |week| %>
-  <tr>
-    <td><%= week.date %></td>
-    <td><a href="/weeks/<%= week.id %>/add">Add Recipes</a></td>
-    <td>Edit</td>
-    <td><a href="/weeks/<%= week.id %>/delete">Delete</a></td>
-  </tr>
-<% end %>
-</table>
+<section>
+  <form action="/weeks/new" method="POST">
+  <h2>Week of <input type="text" name="date" id="date"></h2>
+  <input type="submit" value="Create Week">
+  </form>
+
+  <h2>Existing Weeks</h2>
+  <table class="week-index">
+  <% current_user.weeks.each do |week| %>
+    <tr>
+      <td><%= week.date %></td>
+      <td><a href="/weeks/<%= week.id %>/add">Add Recipes</a></td>
+      <td>Edit</td>
+      <td><a href="/weeks/<%= week.id %>/delete">Delete</a></td>
+    </tr>
+  <% end %>
+  </table>
+</section>

@@ -1,17 +1,19 @@
-<h2>Edit <%= @recipe.name %></h2>
+<section>
+  <h2>Edit <%= @recipe.name %></h2>
 
-<form action="/recipes/<%= @recipe.id %>/edit" method="POST" id="edit_recipe">
-<input id="hidden" type="hidden" name="_method" value="patch">
+  <form action="/recipes/<%= @recipe.id %>/edit" method="POST" id="edit_recipe">
+  <input id="hidden" type="hidden" name="_method" value="patch">
 
-<h3>Edit Name</h3>
-<input type="text" name="name" id="name" placeholder="<%= @recipe.name %>">
+  <h3>Edit Name:</h3>
+  <input type="text" name="name" id="name" placeholder="<%= @recipe.name %>" value="<%= @recipe.name %>">
 
-<h3>Edit Cooktime</h3>
-<input type="text" name="cooktime" id="cooktime" placeholder="<%= @recipe.cooktime %>">
+  <h3>Edit Total Time to Make:</h3>
+  <input type="text" name="cooktime" id="cooktime" placeholder="<%= @recipe.cooktime %>" value="<%= @recipe.cooktime %>">
 
-<h3>Edit Ingredients</h3>
-<textarea form="edit_recipe" name="recipe[ingredients]" id="ingredients"></textarea>
-<br></br>
-<input type="submit" value="submit">
+  <h3>Edit Ingredients</h3>
+  <textarea form="edit_recipe" name="recipe[ingredients]" id="ingredients" value="<%= @recipe.ingredients %>"></textarea>
+  <br></br>
+  <input type="submit" value="submit" class="button">
 
-</form>
+  </form>
+</section>

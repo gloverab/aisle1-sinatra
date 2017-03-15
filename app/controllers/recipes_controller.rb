@@ -3,11 +3,21 @@ require './config/environment'
 class RecipesController < ApplicationController
 
   get '/recipes/new' do
-    erb :'recipes/new'
+    if logged_in?
+      erb :'recipes/new'
+    else
+      flash[:message] = "You must be logged in to view that (or pretty much any other) page!"
+      redirect "/"
+    end
   end
 
   get '/recipes' do
-    erb :'recipes/index'
+    if logged_in?
+      erb :'recipes/index'
+    else
+      flash[:message] = "You must be logged in to view that (or pretty much any other) page!"
+      redirect "/"
+    end
   end
 
   post '/recipes' do
@@ -32,8 +42,13 @@ class RecipesController < ApplicationController
   end
 
   get '/recipes/:id/edit' do
-    @recipe = Recipe.find_by_id(params[:id])
-    erb :'recipes/edit'
+    if logged_in?
+      @recipe = Recipe.find_by_id(params[:id])
+      erb :'recipes/edit'
+    else
+      flash[:message] = "You must be logged in to view that (or pretty much any other) page!"
+      redirect "/"
+    end
   end
 
   patch '/recipes/:id/edit' do
@@ -55,15 +70,28 @@ class RecipesController < ApplicationController
   end
 
   get '/recipes/:slug' do
-    @recipe = Recipe.find_by_slug(params[:slug])
-    erb :'recipes/show'
+    if logged_in?
+      @recipe = Recipe.find_by_slug(params[:slug])
+      erb :'recipes/show'
+    else
+      flash[:message] = "You must be logged in to view that (or pretty much any other) page!"
+      redirect "/"
+    end
   end
 
   get '/recipes/add/:id' do
-    recipe = Recipe.find_by(id: params[:id])
-    current_week.recipes << recipe
-    flash[:message] = "Successfully added #{recipe.name} to week of #{current_week.date}!"
-    redirect "/recipes"
+    if logged_in? && current_week
+      recipe = Recipe.find_by(id: params[:id])
+      current_week.recipes << recipe
+      flash[:message] = "Successfully added #{recipe.name} to week of #{current_week.date}!"
+      redirect "/recipes"
+    elsif logged_in? && !current_week
+      flash[:message] = "Please select or create a week so you can add a recipe to it!"
+      redirect "/weeks"
+    else
+      flash[:message] = "You must be logged in to view that (or pretty much any other) page!"
+      redirect "/"
+    end
   end
 
   delete '/recipes/:id/delete' do

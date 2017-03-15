@@ -1,22 +1,29 @@
-<h2><%= current_week.date %></h2>
+<section>
+  <h2><%= current_week.date %></h2>
 
-<h3>Recipes</h3>
-<ul>
-  <% current_week.recipes.each do |recipe| %>
-  <li><%= recipe.name %> - <a href="/weeks/recipe/<%= recipe.id %>/delete">remove</a></li>
-  <% end %>
-</ul>
+  <h3>Recipes</h3>
+  <ul>
+    <% current_week.recipes.each do |recipe| %>
+    <li><%= recipe.name %> - <a href="/weeks/recipe/<%= recipe.id %>/delete">remove</a></li>
+    <% end %>
+  </ul>
 
-<h3>Needed for this week:</h3>
-<ul>
-  <% current_week.ingredients.uniq.each do |ingredient| %>
-  <li><%= ingredient.name %></li>
-  <% end %>
-</ul>
+  <h3>Needed for this week:</h3>
+  * indicates item appears on duplicate list.
+  <ul>
+    <% current_week.ingredients.uniq.each do |ingredient| %>
+    <li><%= ingredient.name %>
+      <% if current_week.duplicate_ingredients.include?(ingredient) %>
+      *
+      <% end %>
+    </li>
+    <% end %>
+  </ul>
 
-<h4>Duplicate Items</h4>
-<ul>
-  <% current_week.display_duplicates.each do |x, y| %>
-  <li><%=x.name%> appear(s) <%= y %> times</li>
-  <% end %>
-</ul>
+  <h4>Duplicate Items</h4>
+  <ul>
+    <% current_week.display_duplicates.each do |x, y| %>
+    <li><%=x.name%> appear(s) <%= y %> times</li>
+    <% end %>
+  </ul>
+</section>

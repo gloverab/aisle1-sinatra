@@ -3,7 +3,7 @@ require './config/environment'
 class UsersController < ApplicationController
 
   get '/users/new' do
-    erb :'users/new'
+      erb :'users/new'
   end
 
   post '/users/new' do
@@ -26,7 +26,12 @@ class UsersController < ApplicationController
   end
 
   get '/users/weeks' do
-    erb :'weeks/index'
+    if logged_in?
+      erb :'weeks/index'
+    else
+      flash[:message] = "You must be logged in to view that (or pretty much any other) page!"
+      redirect "/"
+    end
   end
 
   post '/weeks/new' do
@@ -39,8 +44,13 @@ class UsersController < ApplicationController
   end
 
   get '/users/:username' do
-    @user = User.find_by(username: params[:username])
-    erb :'users/home'
+    if logged_in?
+      @user = User.find_by(username: params[:username])
+      erb :'users/home'
+    else
+      flash[:message] = "You must be logged in to view that (or pretty much any other) page!"
+      redirect "/"
+    end
   end
 
 end
