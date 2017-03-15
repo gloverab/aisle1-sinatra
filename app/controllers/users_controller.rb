@@ -19,8 +19,8 @@ class UsersController < ApplicationController
   end
 
   post '/users/login' do
-    # @user = User.find_by(username: params[:username])
-    if @user = User.find_by(username: params[:username]) && @user.authenticate(params[:password])
+    @user = User.find_by(username: params[:username])
+    if @user.authenticate(params[:password])
       session[:id] = @user.id
       redirect "/users/#{@user.username}"
     else
