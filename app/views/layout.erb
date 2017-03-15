@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Shoppr</title>
+    <title>Aisle1 - Make your life a little easier.</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,700,800,900" rel="stylesheet">
   </head>
@@ -10,7 +10,7 @@
 
     <header>
       <% if logged_in? %>
-      <a href="/users/<%= current_user.username %>" class="logo">Shoppr</a>
+      <a href="/users/<%= current_user.username %>" class="logo">Aisle1</a>
 
       <div class="week" style="float: right; margin-bottom: 0;">
         <% if current_week != nil %>
@@ -30,7 +30,7 @@
       </div>
 
       <% else %>
-      <a href="/" class="logo">Shoppr</a>
+      <a href="/" class="logo">Aisle1</a>
 
       <div class="nav">
         <ul>

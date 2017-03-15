@@ -1,6 +1,10 @@
 <%= flash[:message] unless flash[:message] = nil %>
 <section>
 
+  <% if current_user.recipes.empty? %>
+  <h2>It looks like you don't have any recipes yet! <a href="/recipes/new">Click here</a> to change that.</h2>
+
+  <% else %>
   <h2>Hi <%= current_user.name %>, here are all your recipes</h2>
 
   <table class="recipe-index">
@@ -14,4 +18,5 @@
 
     <% end %>
   </table>
+  <% end %>
 </section>
