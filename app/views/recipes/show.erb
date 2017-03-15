@@ -1,13 +1,12 @@
+<%= flash[:message] %>
+
 <section>
   <h2><%= @recipe.name %></h2>
+  <div id="edit-delete">
+    <a href="/recipes/<%= @recipe.id %>/edit">Edit Recipe</a>
+  </div>
 
-  <a href="/recipes/<%= @recipe.id %>/edit">Edit Recipe</a>
-  <form action="/recipes/<%= @recipe.id %>/delete" method="POST">
-    <input id="hidden" type="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete Recipe">
-  </form>
-
-  <h4>Estimated Cooktime</h4>
+  <h4>Estimated Total Time</h4>
   <p><%= @recipe.cooktime %></p>
 
   <h4>Ingredients</h4>
@@ -17,5 +16,10 @@
     <% end %>
   </ul>
 
+  <form action="/recipes/<%= @recipe.id %>/delete" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Recipe" id="delete-btn">
+  </form>
+  <br>
   <a href="/recipes">back</a>
 </section>

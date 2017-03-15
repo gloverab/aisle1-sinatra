@@ -51,22 +51,40 @@ class RecipesController < ApplicationController
     end
   end
 
+  # patch '/recipes/:id/edit' do
+  #   @recipe = Recipe.find_by_id(params[:id])
+  #   @recipe.update(name: params[:name]) unless params[:name].empty?
+  #   @recipe.update(cooktime: params[:cooktime]) unless params[:cooktime].empty?
+  #
+  #   if !params[:recipe][:ingredients].empty?
+  #     ingredient_names = ingredient_parser(params[:recipe][:ingredients])
+  #     ingredient_ids_array = ingredient_names.collect do |ingredient|
+  #       new_ingredient = Ingredient.find_or_create_by(name: ingredient.downcase)
+  #       new_ingredient.id
+  #     end
+  #     @recipe.ingredient_ids=ingredient_ids_array
+  #   end
+  #
+  #   redirect "/recipes/#{@recipe.slug}"
+  # end
+
   patch '/recipes/:id/edit' do
     @recipe = Recipe.find_by_id(params[:id])
-    @recipe.update(name: params[:name]) unless params[:name].empty?
-    @recipe.update(cooktime: params[:cooktime]) unless params[:cooktime].empty?
-
-    if !params[:recipe][:ingredients].empty?
-      ingredient_names = ingredient_parser(params[:recipe][:ingredients])
-      ingredient_ids_array = ingredient_names.collect do |ingredient|
-        new_ingredient = Ingredient.find_or_create_by(name: ingredient.downcase)
-        new_ingredient.id
+    if @recipe.update(name: params[:name], cooktime: params[:cooktime])
+      if !params[:recipe][:ingredients].empty?
+        ingredient_names = ingredient_parser(params[:recipe][:ingredients])
+        ingredient_ids_array = ingredient_names.collect do |ingredient|
+          new_ingredient = Ingredient.find_or_create_by(name: ingredient.downcase)
+          new_ingredient.id
+        end
+        @recipe.ingredient_ids=ingredient_ids_array
       end
-
-      @recipe.ingredient_ids=ingredient_ids_array
-    end
-
-    redirect "/recipes/#{@recipe.slug}"
+   		flash[:message] = "You've successfully updated #{@recipe.name}"
+		  redirect "/recipes/#{@recipe.slug}"
+  	else
+  		flash[:message] = @recipe.errors.full_messages
+  		erb :'recipes/edit'
+  	end
   end
 
   get '/recipes/:slug' do
