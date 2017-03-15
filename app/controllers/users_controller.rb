@@ -13,15 +13,19 @@ class UsersController < ApplicationController
       session[:id] = user.id
       redirect "/users/#{user.username}"
     else
-      redirect "/"
+      flash[:message] = "Sorry, you need to fill out all the fields below in order to create an account!"
+      redirect "/users/new"
     end
   end
 
   post '/users/login' do
-    @user = User.find_by(username: params[:username])
-    if @user && @user.authenticate(params[:password])
+    # @user = User.find_by(username: params[:username])
+    if @user = User.find_by(username: params[:username]) && @user.authenticate(params[:password])
       session[:id] = @user.id
       redirect "/users/#{@user.username}"
+    else
+      flash[:message] = "Sorry, we couldn't find that username/password combination! Please try again."
+      redirect "/"
     end
   end
 
