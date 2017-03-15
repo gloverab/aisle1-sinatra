@@ -1,10 +1,6 @@
-#Shoppr 0.1
+#Aisle1
 
 ##Overview
-First things first, this is an app with a bad name. If you or anyone you know can think of a better one, please refer them (along with any other questions or input) to alexanderbglover@gmail.com.
-
-Glad that's out of the way.
-
 The purpose of this app is to help all of the organized meal-prep-folk of the world to create a shopping list based on what meals they've chosen for a particular week. Over time, a user will have a database of recipes that they've entered. They then will be able to select however many recipes they'd like (or create new recipes), and a shopping list for that week will auto-generate.
 
 ##instructions
