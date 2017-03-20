@@ -12,10 +12,13 @@ class WeeksController < ApplicationController
   end
 
   get "/weeks/:id/add" do
-    if logged_in?
-    session[:week] = params[:id]
-
-    redirect "/recipes"
+    @week = Week.find_by(id: params[:id])
+    if logged_in? && current_user.weeks.include?(@week)
+      session[:week_id] = params[:id]
+      redirect "/recipes"
+    elsif !current_user.weeks.include?(@week)
+      flash[:message] = "You can't add recipes to weeks that aren't yours!"
+      redirect "/weeks"
     else
       flash[:message] = "You must be logged in to view that (or pretty much any other) page!"
       redirect "/"

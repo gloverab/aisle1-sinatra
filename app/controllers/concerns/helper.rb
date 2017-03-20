@@ -5,16 +5,15 @@ module Helper
   end
 
   def current_user
-    @current_user ||= User.find_by(id: session[:id]) if session[:id]
+    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
 
   def ingredient_parser(ingredients)
     ingredients.split(/\s*,\s*/)
-    # binding.pry
   end
 
   def current_week
-    @current_week ||= Week.find_by(id: session[:week]) if session[:week]
+    @current_week ||= Week.find_by(id: session[:week_id]) if session[:week_id]
   end
 
 end

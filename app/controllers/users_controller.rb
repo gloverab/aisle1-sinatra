@@ -3,25 +3,27 @@ require './config/environment'
 class UsersController < ApplicationController
 
   get '/users/new' do
-      erb :'users/new'
+    redirect to '/' if logged_in?
+    @user = User.new
+    erb :'users/new'
   end
 
-  post '/users/new' do
-    # binding.pry
-    user = User.new(params)
-    if user.save
-      session[:id] = user.id
+  post '/users' do
+    redirect to '/' if logged_in?
+    @user = User.new(params)
+    if @user.save
+      session[:user_id] = @user.id
       redirect "/users/#{user.username}"
     else
-      flash[:message] = "Sorry, you need to fill out all the fields below in order to create an account!"
-      redirect "/users/new"
+      flash[:message] = @user.errors.full_messages.join(", ")
+      erb :'users/new'
     end
   end
 
   post '/users/login' do
     @user = User.find_by(username: params[:username])
     if @user.authenticate(params[:password])
-      session[:id] = @user.id
+      session[:user_id] = @user.id
       redirect "/users/#{@user.username}"
     else
       flash[:message] = "Sorry, we couldn't find that username/password combination! Please try again."
@@ -42,7 +44,7 @@ class UsersController < ApplicationController
     week = Week.new(params)
     week.user_id = current_user.id
     week.save
-    session[:week] = week.id
+    session[:week_id] = week.id
 
     redirect "/users/weeks"
   end

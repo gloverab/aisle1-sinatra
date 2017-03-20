@@ -4,11 +4,11 @@
   <h1>Hey there! We're excited to have you!</h1>
   <h3>We just need a little bit of info to help you get started.</h3>
 
-  <form action="/users/new" method="POST">
+  <form action="/users" method="POST">
 
-    <p>Name: <input type="text" name="name" id="name"></p>
-    <p>Email Address: <input type="text" name="email" id="email"></p>
-    <p>Username: <input type="text" name="username" id="username"></p>
+    <p>Name: <input type="text" name="name" id="name" value="<%= @user.name %>"></p>
+    <p>Email Address: <input type="text" name="email" id="email" value="<%= @user.email %>"></p>
+    <p>Username: <input type="text" name="username" id="username" value="<%= @user.username %>"></p>
     <p>Password: <input type="password" name="password" id="password"></p>
 
     <input type="submit" value="submit" class="button">

@@ -42,31 +42,17 @@ class RecipesController < ApplicationController
   end
 
   get '/recipes/:id/edit' do
-    if logged_in?
-      @recipe = Recipe.find_by_id(params[:id])
+    @recipe = Recipe.find_by_id(params[:id])
+    if logged_in? && current_user.recipes.include?(@recipe)
       erb :'recipes/edit'
+    elsif !current_user.recipes.include?(@recipe)
+      flash[:message] = "Sorry, you can only edit recipes that you've created!"
+      redirect "/recipes"
     else
       flash[:message] = "You must be logged in to view that (or pretty much any other) page!"
       redirect "/"
     end
   end
-
-  # patch '/recipes/:id/edit' do
-  #   @recipe = Recipe.find_by_id(params[:id])
-  #   @recipe.update(name: params[:name]) unless params[:name].empty?
-  #   @recipe.update(cooktime: params[:cooktime]) unless params[:cooktime].empty?
-  #
-  #   if !params[:recipe][:ingredients].empty?
-  #     ingredient_names = ingredient_parser(params[:recipe][:ingredients])
-  #     ingredient_ids_array = ingredient_names.collect do |ingredient|
-  #       new_ingredient = Ingredient.find_or_create_by(name: ingredient.downcase)
-  #       new_ingredient.id
-  #     end
-  #     @recipe.ingredient_ids=ingredient_ids_array
-  #   end
-  #
-  #   redirect "/recipes/#{@recipe.slug}"
-  # end
 
   patch '/recipes/:id/edit' do
     @recipe = Recipe.find_by_id(params[:id])
@@ -88,9 +74,12 @@ class RecipesController < ApplicationController
   end
 
   get '/recipes/:slug' do
-    if logged_in?
-      @recipe = Recipe.find_by_slug(params[:slug])
+    @recipe = Recipe.find_by_slug(params[:slug])
+    if logged_in? && current_user.recipes.include?(@recipe)
       erb :'recipes/show'
+    elsif !current_user.recipes.include?(@recipe)
+      flash[:message] = "Sorry, you can only view recipes that you've created!"
+      redirect "/recipes"
     else
       flash[:message] = "You must be logged in to view that (or pretty much any other) page!"
       redirect "/"
@@ -113,8 +102,13 @@ class RecipesController < ApplicationController
   end
 
   delete '/recipes/:id/delete' do
-    recipe = Recipe.find_by_id(params[:id])
-    recipe.delete
+    @recipe = Recipe.find_by_id(params[:id])
+    if current_user.recipes.include?(@recipe)
+      recipe = Recipe.find_by_id(params[:id])
+      recipe.delete
+    else
+      flash[:message] = "You can't delete recipes that aren't yours!"
+    end
     redirect "/recipes"
   end
 
