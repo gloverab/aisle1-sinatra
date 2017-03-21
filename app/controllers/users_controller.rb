@@ -2,6 +2,14 @@ require './config/environment'
 
 class UsersController < ApplicationController
 
+  get '/' do
+    if !logged_in?
+      erb :'logged-out/index'
+    else
+      redirect "/users/#{current_user.username}"
+    end
+  end
+
   get '/users/new' do
     redirect to '/' if logged_in?
     @user = User.new
@@ -56,6 +64,15 @@ class UsersController < ApplicationController
     else
       flash[:message] = "You must be logged in to view that (or pretty much any other) page!"
       redirect "/"
+    end
+  end
+
+  get '/logout' do
+    if logged_in?
+      session.clear
+      redirect '/'
+    else
+      redirect '/'
     end
   end
 

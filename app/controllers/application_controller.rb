@@ -13,21 +13,4 @@ class ApplicationController < Sinatra::Base
     enable :sessions
   end
 
-  get '/' do
-    if !logged_in?
-      erb :'logged-out/index'
-    else
-      redirect "/users/#{current_user.username}"
-    end
-  end
-
-  get '/logout' do
-    if logged_in?
-      session.clear
-      redirect '/'
-    else
-      redirect '/'
-    end
-  end
-
 end
