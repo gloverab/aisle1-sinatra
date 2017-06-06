@@ -22,36 +22,35 @@ class RecipesController < ApplicationController
 
   post '/recipes' do
     # binding.pry
-    @recipe = Recipe.new(
-    name: params[:name],
-    cooktime: params[:cooktime],
-    user_id: current_user.id
-    )
-    @recipe.save
+    @recipe = current_user.recipes.build(name: params[:name], cooktime: params[:cooktime])
+    if @recipe.save
 
-    ingredient_names = ingredient_parser(params[:recipe][:ingredients])
+      ingredient_names = ingredient_parser(params[:recipe][:ingredients])
 
-    ingredient_ids_array = ingredient_names.collect do |ingredient|
-      new_ingredient = Ingredient.find_or_create_by(name: ingredient.downcase)
-      new_ingredient.id
-    end
+      ingredient_ids_array = ingredient_names.collect do |ingredient|
+        new_ingredient = Ingredient.find_or_create_by(name: ingredient.downcase)
+        new_ingredient.id
+      end
 
     @recipe.ingredient_ids=ingredient_ids_array
+  end
 
     redirect "/recipes"
   end
 
   get '/recipes/:id/edit' do
-    @recipe = Recipe.find_by_id(params[:id])
-    if logged_in? && current_user.recipes.include?(@recipe)
+    redirect to '/' if !logged_in?
+    @recipe = Recipe.find_by_id(params[:id]) unless !logged_in?
+    if @recipe && @recipe.user == current_user
       erb :'recipes/edit'
-    elsif !current_user.recipes.include?(@recipe)
+    else
       flash[:message] = "Sorry, you can only edit recipes that you've created!"
       redirect "/recipes"
-    else
-      flash[:message] = "You must be logged in to view that (or pretty much any other) page!"
-      redirect "/"
     end
+    # else
+    #   # flash[:message] = "You must be logged in to view that (or pretty much any other) page!"
+    #   redirect "/"
+    # end
   end
 
   patch '/recipes/:id/edit' do
